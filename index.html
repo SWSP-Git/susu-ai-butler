@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>苏苏 AI 智能管家系统 · 项目介绍</title>
+<style>
+  :root {
+    --bg: #0b1020; --panel: #131a2e; --card: #1a2340;
+    --line: #2a3557; --text: #dce6f5; --dim: #8fa0bd;
+    --acc: #4cc3a8; --acc2: #6d9bf5; --warn: #e0b25c; --pink: #e8a0b8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: radial-gradient(1200px 600px at 20% -10%, #16233f 0, var(--bg) 55%);
+    color: var(--text); font: 15px/1.8 "Microsoft YaHei", "Segoe UI", system-ui, sans-serif;
+    padding: 32px 16px;
+  }
+  .wrap { max-width: 1000px; margin: 0 auto; }
+  header { border: 1px solid var(--line); background: var(--panel); border-radius: 16px; padding: 30px 32px; }
+  h1 { margin: 0 0 12px; font-size: 28px; letter-spacing: 1px; }
+  h1 .accent { color: var(--acc); }
+  .sub { color: var(--dim); font-size: 14px; margin: 0; }
+  .position { margin-top: 14px; padding: 14px 16px; background: var(--card); border-left: 3px solid var(--acc); border-radius: 8px; }
+  .chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: 12px; color: var(--text); background: var(--card); border: 1px solid var(--line); padding: 4px 10px; border-radius: 999px; }
+  .chip.g { color: var(--acc); border-color: rgba(76,195,168,.45); }
+  section { margin-top: 22px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 24px 28px; }
+  h2 { margin: 0 0 14px; font-size: 20px; color: var(--acc); display: flex; align-items: center; gap: 10px; }
+  h2 .no { font-size: 12px; color: var(--bg); background: var(--acc); border-radius: 6px; padding: 2px 8px; }
+  h3 { font-size: 16px; color: var(--acc2); margin: 20px 0 8px; }
+  h3.pink { color: var(--pink); }
+  p { margin: 8px 0; }
+  ul, ol { margin: 8px 0; padding-left: 24px; }
+  li { margin: 5px 0; }
+  .diff { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .diff .col { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .diff .col h4 { margin: 0 0 8px; font-size: 14px; }
+  .diff .col.old h4 { color: var(--warn); }
+  .diff .col.new h4 { color: var(--acc); }
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th, td { border: 1px solid var(--line); padding: 9px 12px; text-align: left; vertical-align: top; }
+  th { background: var(--card); color: var(--acc); font-weight: 600; }
+  td.done { color: var(--acc); white-space: nowrap; }
+  td.part { color: var(--warn); white-space: nowrap; }
+  td.zero { color: #f08a8a; white-space: nowrap; }
+  code, pre {
+    font-family: Consolas, "Cascadia Mono", monospace; font-size: 13px;
+    background: #0c1224; border: 1px solid var(--line); border-radius: 8px;
+  }
+  code { padding: 2px 6px; color: #a9c3ff; }
+  pre { padding: 14px 16px; overflow-x: auto; line-height: 1.6; color: #c9d8f2; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .kv { display: grid; grid-template-columns: 190px 1fr; gap: 4px 12px; font-size: 14px; }
+  .kv b { color: var(--dim); font-weight: 500; }
+  .emobox { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 12px 0; }
+  .emo { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .emo b { color: var(--pink); display: block; font-size: 15px; }
+  .emo span { color: var(--dim); font-size: 12px; }
+  .tag { display: inline-block; font-size: 11px; padding: 1px 8px; border-radius: 6px; margin-left: 6px; }
+  .tag.new { background: rgba(76,195,168,.15); color: var(--acc); }
+  footer { margin-top: 28px; text-align: center; color: var(--dim); font-size: 13px; }
+  @media (max-width: 720px) { .diff, .grid2, .kv, .emobox { grid-template-columns: 1fr; } body { padding: 16px 8px; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>AI 智能管家系统 <span class="accent">「苏苏」</span> · 项目介绍</h1>
+    <p class="sub">项目根目录：<code>E:\AI智能管家系统技术验证</code></p>
+    <div class="position">
+      这是一个<b>基于 AI 语义理解能力的需求识别型、可主动提供服务与情感关怀的高安全性与隐私性 AI 智能管家系统</b>。它不是"等命令"的工具，而是"懂你需要、会主动照顾你"的家庭伙伴。
+    </div>
+    <div class="chips">
+      <span class="chip g">需求识别型</span><span class="chip g">主动关怀</span>
+      <span class="chip g">高安全性</span><span class="chip g">隐私本地优先</span>
+      <span class="chip g">四层解耦</span><span class="chip g">可替换接口层</span>
+    </div>
+  </header>
+
+  <section class="card">
+    <h2><span class="no">01</span>核心差异点：需求识别型 vs 指令识别型</h2>
+    <div class="diff">
+      <div class="col old">
+        <h4>市面常规 · 指令识别型</h4>
+        <p>必须说出精确命令才执行（"打开客厅灯""空调调到 26 度"），本质是"语音遥控器"——被动、无上下文、无情感。</p>
+      </div>
+      <div class="col new">
+        <h4>本系统 · 需求识别型 + 主动关怀</h4>
+        <p>理解自然语言背后的真实意图，结合情绪、生活状态、时间与环境主动判断并行动，提供陪伴而非冷冰冰的应答。</p>
+      </div>
+    </div>
+    <ul>
+      <li><b>语义理解</b>：大模型理解自然语言意图，而非关键词死记硬背。</li>
+      <li><b>主动服务</b>：结合情绪、生活状态、时间、环境（灯是否全关、是否静默、蓝牙是否在附近）主动行动，不等开口。</li>
+      <li><b>情感人格</b>：心情/精力/多巴胺三维情绪，情绪反过来影响语气（心情好黏人、低落傲娇）。</li>
+      <li><b>安全为纲</b>：所有动作经身份 + 风险 + 状态机 + 手机远程验证多重闸门。</li>
+      <li><b>隐私本地</b>：ASR、声纹、本地大模型可本地运行，数据不出本机。</li>
+    </ul>
+    <p>例：你说"今天好累"→ 它理解情绪、放缓语气回应，并可能主动调暗灯、提醒休息；深夜灯全关又静默 30 分钟 → 自动进入"陪睡模式"；说"我走了" → 结合开门与蓝牙判断是否真离家，进入离家守护。</p>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">02</span>设计目标</h2>
+    <ol>
+      <li><b>纯本地优先</b>：ASR、声纹、本地大模型可本地运行，隐私不出本机（主脑当前临时接云端，仅为智力补充，可回退本地）。</li>
+      <li><b>四层解耦</b>：认证、框架、人格、硬件四层职责清晰，可独立替换与扩展。</li>
+      <li><b>安全为纲</b>：门锁为最高危设备，开锁受身份 + 风险 + 状态机 + 手机远程二次验证多重约束，4 条安全不变量全程守护。</li>
+      <li><b>开箱即用</b>：免装 Tailscale 客户端、扫码配对、桌面/手机/HA 三端状态一致。</li>
+      <li><b>可持续演进</b>：MCP 协议、TTS/Live2D 驱动事件总线均为可替换接口层。</li>
+    </ol>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">03</span>总体架构（四层 + 配套）</h2>
+    <table>
+      <thead><tr><th>层级</th><th>名称</th><th>职责</th><th>完成度</th></tr></thead>
+      <tbody>
+        <tr><td>第一层</td><td>身份验证层</td><td>身份识别 + 风险决策 + 权限状态机</td><td class="done">100%</td></tr>
+        <tr><td>第二层</td><td>框架层</td><td>Tkinter 桌面 + HTTP/WS/MCP 服务</td><td class="part">95%</td></tr>
+        <tr><td>第三层</td><td>AI 人格层</td><td>Qwen2.5-1.5B + LoRA 人格模型</td><td class="done">100%</td></tr>
+        <tr><td>第四层</td><td>硬件兜底层</td><td>ESP32 硬件兜底（空占位）</td><td class="zero">0%</td></tr>
+      </tbody>
+    </table>
+    <div class="grid2">
+      <div><h3>Home Assistant</h3><p>Docker 部署，MQTT 双向同步 + 户型图可视化，完成度 100%。</p></div>
+      <div><h3>手机管家 App</h3><p>Android / HomeButler，设备控制 + 指纹 + 日志 + 扫码配对，完成度 95%。</p></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">04</span>目录结构</h2>
+    <pre>E:\AI智能管家系统技术验证\
+├── README.md                   项目总索引
+├── 项目整理归纳.md              完整功能清单、设计决策、待办
+├── 第一层身份验证/              认证核心（纯逻辑，无 UI/IO）
+├── 第二层框架层_V26/            主框架（唯一有效版本）
+│   ├── main.py                  主入口
+│   ├── state_config.json        持久化配置（72 项）
+│   ├── core/                    状态、设备、模型、HA、语音、声纹等 18 个模块
+│   ├── ui/                      主窗口、隐藏后台、配对窗口
+│   ├── comm/server.py           HTTP API + WebSocket
+│   ├── comm/mcp_server.py       MCP 服务
+│   ├── driver/                  TTS/Live2D 驱动进程 + 桥接页 + 音色页
+│   └── logs/                    主日志、手机日志、审计日志
+├── 第三层AI人格层/              训练数据与脚本 + LoRA 模型
+├── 第四层硬件兜底层/            空占位，待 ESP32 硬件
+├── 手机管家App/                 Android 工程（36 个 Kotlin 文件，9 种设备模板）
+├── tsnet-gateway/               内嵌 Tailscale 网关（Go，21MB）
+├── 语音样本/                    声纹注册样本
+├── ha_physical/                 Home Assistant 挂载目录
+├── models/                      AI 模型（Qwen2.5 + 合并模型）
+├── susu_v1_lora_cloud/          云端 LoRA 训练产物
+├── LLaMA-Factory/               训练框架
+├── venv311/                     主 Python 环境（3.11.9）
+├── venv_llamafactory/           训练用 Python 环境
+└── wheels/                      离线 pip wheel 包</pre>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">05</span>各层完成情况</h2>
+
+    <h3>第一层 · 身份验证（100%）</h3>
+    <ul>
+      <li>三个正交维度：身份（owner/other/unknown）× 风险（极低~极高危）× 状态机（state_0/1）。</li>
+      <li>身份强度分层：音频 ≥2.5s = strong；1.0~2.5s = weak；&lt;1.0s 不判定。</li>
+      <li>4 条安全不变量（118 项测试全过）：I1 极高危永远拒绝；I2 他人/未知不能执行低风险及以上；I3 STATE_1 单次有效；I4 物理密钥=0 时中/高风险必须手机远程验证。</li>
+      <li>三端接入：桌面 / 手机 App / Home Assistant。</li>
+    </ul>
+
+    <h3>第二层 · 框架层（95%）</h3>
+    <p>核心数据：房间 11 个；设备 25 个 + 1 门锁；device_status 47 条；config 72 项。</p>
+    <ul>
+      <li><b>设备与家庭自动化</b>：7 种设备类型、属性注册表外置、三级拓扑（房间→容器→物品）、浴霸档位型 + 档位记忆、HA 双向 MQTT 同步、服务端为状态唯一真相源。</li>
+    </ul>
+
+    <h3 class="pink">★ 情绪系统（"情感关怀"的核心）</h3>
+    <div class="emobox">
+      <div class="emo"><b>心情 mood</b><span>初始 85，互动会提升，被夸奖 +15</span></div>
+      <div class="emo"><b>精力 energy</b><span>初始 90，陪睡时每 10 分钟 +2 恢复</span></div>
+      <div class="emo"><b>多巴胺 dopamine</b><span>初始 75，被夸奖 +20</span></div>
+    </div>
+    <ul>
+      <li>按 10 分钟一个结算周期自动演化：正常 -2.0/-1.0/-1.5；离家更缓 -1.0/-0.5/-1.0；陪睡精力反而 +2.0。</li>
+      <li>互动增长：聊天一次 心情+2 / 精力+1 / 多巴胺+0.5；被夸奖 心情+15 / 多巴胺+20（20+ 夸奖关键词检测）。</li>
+      <li>情绪反过来塑造人格语气：心情 ≥70 "乖巧黏人"；50~70 "正常乖巧"；&lt;50 "傲娇低落"——苏苏不是固定语气模板，会随时间与互动变。</li>
+    </ul>
+
+    <h3 class="pink">★ 生活状态（与物理位置解耦）</h3>
+    <ul>
+      <li>三态 normal / sleep / away；触发方式：AI 语义指令 / 自动陪睡（23:00~6:00 + 灯全关 + 静默 30 分钟）/ 手动按钮。</li>
+      <li>回家判断：门锁指纹 AND 蓝牙同时满足，30 秒后复检；离家：说"我走了"后 10 分钟内开门确认，或手机 WS 断连 30 秒自动离家。事件驱动，零轮询。</li>
+    </ul>
+
+    <h3>语音与声纹 / 其它</h3>
+    <ul>
+      <li>本地 sherpa-onnx 流式中文 ASR + 3D-Speaker ERes2Net 声纹；音频时长决定身份强度。</li>
+      <li>双端日志、审计日志、扫码配对、tsnet 内嵌 Tailscale 网关、MCP 服务、TTS/Live2D 驱动、隐藏后台 8 标签页。</li>
+    </ul>
+
+    <h3>第三层 · AI 人格层（100%）</h3>
+    <p>这是"苏苏"之所以像"苏苏"的一层，负责人格、语气与情感表达。</p>
+    <ul>
+      <li><b>人格设定</b>：名字「苏苏」，18 岁少女女仆兼爱人，称呼用户为「主人」，语气亲密、撒娇、口语化。</li>
+      <li><b>行为规则</b>：表情/动作用圆括号包裹（如「（歪头）」）；只有真要操作家电才用【动作:xxx】；普通对话不带动作标签。</li>
+      <li><b>模型</b>：基座 Qwen2.5-1.5B-Instruct，QLoRA（4-bit）微调，5000 条 ShareGPT，最终 Loss 0.71，合并模型 2955 MB，本地部署 4-bit 量化（显存 2178 MiB）。</li>
+      <li><b>训练数据四类扩充</b>：核心信念 core_belief / 身份认知 identity / 亲密关系 intimacy / 核心对话 core。</li>
+      <li><b>情绪与人格联动</b>：框架层 mood/energy/dopamine 注入人格层系统提示，同一句需求在心情好与低落时语气不同。</li>
+      <li><b>当前状态</b>：本地 1.5B 智力不足，主脑临时接云端 SiliconFlow DeepSeek-V3，本地合并模型备份保留。</li>
+    </ul>
+
+    <h3>第四层 · 硬件兜底层（0%）</h3>
+    <p>空目录，待 ESP32 硬件。</p>
+
+    <h3>Home Assistant 集成（100%）</h3>
+    <ul>
+      <li>Docker：homeassistant + ha-mosquitto；26 个实体（light 13 / climate 5 / cover 3 / switch 3 / select 1 / binary_sensor 1）。</li>
+      <li>门锁只读（binary_sensor，无控制入口）；户型图自制 SVG，26 个设备图标。</li>
+    </ul>
+
+    <h3>手机 App（95%）</h3>
+    <ul>
+      <li>Kotlin，包名 com.susu.butler，minSdk 26 / targetSdk 37。</li>
+      <li>门锁卡片（指纹开锁）、扫码配对、分组视图、拖动排序、调色盘、自定义背景图、指纹验证、WS 自动重连、前台服务、双端日志。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">06</span>近期完成（2026-10-22 之后）</h2>
+    <ul>
+      <li>MCP 服务（状态/设备/生活模式 + TTS/Live2D 驱动事件）<span class="tag new">NEW</span></li>
+      <li>TTS / Live2D 最小驱动进程（Edge-TTS / SAPI 音频 + 本地 SSE 桥）<span class="tag new">NEW</span></li>
+      <li>框架回复自动投递 TTS（回复正文 → tts.speak + live2d.play）<span class="tag new">NEW</span></li>
+      <li>Edge-TTS 音色调试页（8 个中文音色 + 语速/音调/音量试听保存）<span class="tag new">NEW</span></li>
+      <li>接入 Prometheus Avatar Live2D 渲染器（8765/avatar 桥接页）<span class="tag new">NEW</span></li>
+      <li>手机端门锁卡片（点按 → 开锁确认 → 指纹 → 服务端开锁）<span class="tag new">NEW</span></li>
+      <li>门锁/中高风险 alias 归一化 + 强制高风险（堵住绕过漏洞）<span class="tag new">NEW</span></li>
+      <li>STATE_1 单次有效 + 身份 TTL + 桌面刷新 bug 修复<span class="tag new">NEW</span></li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">07</span>关键技术 / 安全设计</h2>
+    <ul>
+      <li>门锁唯一合法开锁路径：手机 App 指纹 / 桌面声纹认证；HA 只读，MQTT 命令即拒。</li>
+      <li>极高危操作永久静默拦截（AI 不知情）；禁用词拦截（支持插字变体）。</li>
+      <li>隐藏后台 AI 不可知（开发期免密，收尾加密码）。</li>
+      <li>开发模式默认关闭 + 持久化。</li>
+      <li>凭据加密：Fernet + keyring 系统凭据管理器（API Key / MQTT 密码 / tsnet authkey）。</li>
+      <li>服务端为状态唯一真相源，手机端用返回值覆盖（不做本地推算）。</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">08</span>运行环境</h2>
+    <div class="kv">
+      <b>Python</b><span>3.11.9（venv311）</span>
+      <b>GPU</b><span>RTX 5060 Laptop（8151 MiB），LLM 显存 2178 MiB</span>
+      <b>语音推理</b><span>ASR 与声纹全部走 CPU（不占显存）</span>
+      <b>主脑</b><span>云端 SiliconFlow DeepSeek-V3（临时）；本地 4-bit 合并模型备份</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">09</span>快速开始</h2>
+    <pre># 启动框架（桌面 UI）
+cd "E:\AI智能管家系统技术验证\第二层框架层_V26"
+&amp; "E:\AI智能管家系统技术验证\venv311\Scripts\python.exe" main.py
+
+# 启动 Docker（HA + MQTT）
+Start-Process "C:\Users\刘相杰\AppData\Local\Programs\DockerDesktop\Docker Desktop.exe"
+
+# 第一层测试
+cd "E:\AI智能管家系统技术验证"
+&amp; "E:\AI智能管家系统技术验证\venv311\Scripts\python.exe" "第一层身份验证\test_auth_core.py"
+
+# 构建手机 App
+$env:JAVA_HOME = "C:\Program Files1\jbr"
+cd "E:\AI智能管家系统技术验证\手机管家App"
+.\gradlew.bat assembleDebug --console=plain --no-daemon
+
+# 手机连接：框架主界面「📱 手机配对」→ 手机「扫码配对」</pre>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">10</span>待办事项</h2>
+    <table>
+      <thead><tr><th>优先级</th><th>项目</th><th>说明</th></tr></thead>
+      <tbody>
+        <tr><td>中</td><td>双脑路由验证</td><td>phone_api_key 为空，ask_phone 链路未实测</td></tr>
+        <tr><td>中</td><td>第四层 ESP32</td><td>需硬件，唯一完全未动的层</td></tr>
+        <tr><td>中</td><td>审计日志 UI 优化</td><td>已可用，可加筛选/搜索</td></tr>
+        <tr><td>低</td><td>隐藏后台密码验证</td><td>只差 UI 与校验逻辑</td></tr>
+        <tr><td>低</td><td>声纹样本重录</td><td>当前样本手机录，笔记本识别率偏低</td></tr>
+        <tr><td>低</td><td>本地 LLM 恢复</td><td>当前临时用云端 DeepSeek-V3</td></tr>
+        <tr><td>低</td><td>家庭成员权限分级</td><td>当前只做单主人版</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="card">
+    <h2><span class="no">11</span>已知问题</h2>
+    <ol>
+      <li>声纹识别率偏低：样本用手机录音，笔记本麦克风环境差异大，建议现场重录。</li>
+      <li>Android 14+ 全屏验证需手动授权，当前降级为普通通知。</li>
+      <li>手机 Tailscale 易掉线：Android 省电策略杀后台 VPN，需设为"无限制"。</li>
+      <li>PowerShell 中文显示乱码：用 Python 写 UTF-8 文件 + read 工具读取规避。</li>
+      <li>Docker Desktop 需手动启动：重启后 HA/MQTT 不会自动拉起。</li>
+      <li>Android 构建不能走 Start-Process 重定向（中文路径会变乱码）。</li>
+      <li>HA 改组件类型需清旧 discovery，否则残留幽灵实体。</li>
+      <li>本地 1.5B 模型智力不足：复杂指令理解差，暂用云端 DeepSeek-V3。</li>
+    </ol>
+  </section>
+
+  <footer>AI 智能管家系统「苏苏」· 项目介绍报告 · 依据工作区真实情况生成</footer>
+</div>
+</body>
+</html>
